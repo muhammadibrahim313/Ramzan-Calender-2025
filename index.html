@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramadan Calendar 2025</title>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+      
+      :root {
+          --primary-color: #4a154b;
+          --secondary-color: #7e57c2;
+          --accent-color: #ff9d00;
+          --light-color: #f8f9fa;
+          --dark-color: #343a40;
+          --card-bg: #ffffff;
+          --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+          --border-radius: 16px;
+      }
+      
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      
+      body {
+          background: linear-gradient(135deg, #673ab7 0%, #4a154b 100%);
+          color: var(--dark-color);
+          min-height: 100vh;
+          padding: 30px 15px;
+          position: relative;
+          overflow-x: hidden;
+      }
+      
+      body::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          opacity: 0.5;
+          z-index: -1;
+      }
+      
+      .container {
+          max-width: 1000px;
+          margin: 0 auto;
+      }
+      
+      .header {
+          text-align: center;
+          margin-bottom: 40px;
+          color: white;
+          position: relative;
+          padding: 30px 20px;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border-radius: var(--border-radius);
+          box-shadow: var(--card-shadow);
+          overflow: hidden;
+          animation: fadeIn 1s ease-out forwards;
+      }
+      
+      @keyframes fadeIn {
+          from {
+              opacity: 0;
+              transform: translateY(-20px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+      
+      .header h1 {
+          font-size: 36px;
+          margin-bottom: 15px;
+          font-weight: 700;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+          display: inline-block;
+          position: relative;
+      }
+      
+      .header h1::after {
+          content: "";
+          position: absolute;
+          bottom: -5px;
+          left: 10%;
+          width: 80%;
+          height: 3px;
+          background: var(--accent-color);
+          border-radius: 3px;
+      }
+      
+      .header p {
+          font-size: 18px;
+          opacity: 0.9;
+          font-weight: 300;
+      }
+      
+      .moon-icon {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          width: 60px;
+          height: 60px;
+          opacity: 0.8;
+      }
+      
+      .decor {
+          position: absolute;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          z-index: -1;
+      }
+      
+      .decor-1 {
+          top: -30px;
+          right: -30px;
+          width: 150px;
+          height: 150px;
+      }
+      
+      .decor-2 {
+          bottom: -20px;
+          left: -20px;
+          width: 100px;
+          height: 100px;
+      }
+      
+      .tabs-container {
+          margin-bottom: 30px;
+          position: relative;
+          z-index: 10;
+      }
+      
+      .tabs {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-bottom: 30px;
+      }
+      
+      .tab {
+          padding: 12px 25px;
+          background-color: rgba(255, 255, 255, 0.1);
+          color: white;
+          border-radius: 50px;
+          cursor: pointer;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(5px);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      .tab.active {
+          background-color: var(--accent-color);
+          color: var(--dark-color);
+          box-shadow: 0 6px 20px rgba(255, 157, 0, 0.3);
+          transform: translateY(-3px);
+      }
+      
+      .tab:hover:not(.active) {
+          background-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+      }
+      
+      .calendar-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 20px;
+          margin-bottom: 30px;
+      }
+      
+      .day-card {
+          background: var(--card-bg);
+          border-radius: var(--border-radius);
+          box-shadow: var(--card-shadow);
+          padding: 20px;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInUp 0.5s ease forwards;
+      }
+      
+      @keyframes fadeInUp {
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+      
+      .day-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+      
+      .day-number {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          background-color: var(--accent-color);
+          color: white;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 18px;
+          box-shadow: 0 4px 10px rgba(255, 157, 0, 0.3);
+      }
+      
+      .day-card.first-day .day-number,
+      .day-card.milestone .day-number {
+          background: linear-gradient(135deg, #ff9d00, #ff6a00);
+          width: 44px;
+          height: 44px;
+          font-size: 22px;
+      }
+      
+      .date {
+          font-size: 14px;
+          color: #666;
+          margin-bottom: 25px;
+      }
+      
+      .times {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          margin-top: 10px;
+      }
+      
+      .time-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+      }
+      
+      .time-icon {
+          width: 30px;
+          height: 30px;
+          background-color: rgba(126, 87, 194, 0.1);
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--secondary-color);
+      }
+      
+      .sehri-icon {
+          color: #7e57c2;
+          background-color: rgba(126, 87, 194, 0.1);
+      }
+      
+      .iftar-icon {
+          color: #e65100;
+          background-color: rgba(230, 81, 0, 0.1);
+      }
+      
+      .time-label {
+          font-size: 14px;
+          color: #666;
+      }
+      
+      .time-value {
+          font-weight: 600;
+          font-size: 16px;
+          color: var(--dark-color);
+      }
+      
+      .milestone {
+          position: relative;
+          background: linear-gradient(135deg, #ffffff, #f8f9fa);
+          border: 2px solid var(--accent-color);
+      }
+      
+      .milestone::before {
+          content: "Ashra Complete";
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          font-size: 10px;
+          background-color: var(--accent-color);
+          color: white;
+          padding: 3px 8px;
+          border-radius: 20px;
+          font-weight: 500;
+      }
+      
+      .note-container {
+          margin: 30px auto;
+          max-width: 800px;
+          animation: fadeIn 1s ease-out forwards;
+          animation-delay: 0.5s;
+          opacity: 0;
+      }
+      
+      .note {
+          background-color: rgba(255, 255, 255, 0.9);
+          padding: 20px;
+          border-radius: var(--border-radius);
+          box-shadow: var(--card-shadow);
+          position: relative;
+          overflow: hidden;
+      }
+      
+      .note-icon {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          font-size: 20px;
+          color: var(--accent-color);
+      }
+      
+      .note p {
+          text-align: center;
+          font-size: 14px;
+          line-height: 1.6;
+          color: #555;
+      }
+      
+      .note strong {
+          color: var(--dark-color);
+      }
+      
+      .theme-toggle {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 100;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: var(--accent-color);
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          border: none;
+          font-size: 20px;
+          transition: all 0.3s ease;
+      }
+      
+      .theme-toggle:hover {
+          transform: scale(1.1);
+      }
+      
+      .mosque-silhouette {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 150px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23000000' fill-opacity='0.2' d='M0,256L48,256C96,256,192,256,288,234.7C384,213,480,171,576,170.7C672,171,768,213,864,229.3C960,245,1056,235,1152,208C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+          background-size: cover;
+          background-position: center bottom;
+          pointer-events: none;
+          z-index: 0;
+      }
+      
+      /* Animations for cards */
+      .day-card:nth-child(1) { animation-delay: 0.1s; }
+      .day-card:nth-child(2) { animation-delay: 0.15s; }
+      .day-card:nth-child(3) { animation-delay: 0.2s; }
+      .day-card:nth-child(4) { animation-delay: 0.25s; }
+      .day-card:nth-child(5) { animation-delay: 0.3s; }
+      .day-card:nth-child(6) { animation-delay: 0.35s; }
+      .day-card:nth-child(7) { animation-delay: 0.4s; }
+      .day-card:nth-child(8) { animation-delay: 0.45s; }
+      .day-card:nth-child(9) { animation-delay: 0.5s; }
+      .day-card:nth-child(10) { animation-delay: 0.55s; }
+      
+      @media (max-width: 768px) {
+          .header h1 {
+              font-size: 28px;
+          }
+          
+          .header p {
+              font-size: 16px;
+          }
+          
+          .calendar-grid {
+              grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          }
+          
+          .tab {
+              padding: 10px 20px;
+              font-size: 14px;
+          }
+      }
+      
+      /* Stars animation in background */
+      .stars {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          pointer-events: none;
+      }
+      
+      .star {
+          position: absolute;
+          background-color: white;
+          border-radius: 50%;
+          animation: twinkle var(--duration) ease-in-out infinite;
+          opacity: 0;
+      }
+      
+      @keyframes twinkle {
+          0%, 100% {
+              opacity: 0;
+          }
+          50% {
+              opacity: var(--opacity);
+          }
+      }
+      
+      /* Dark mode */
+      .dark-mode {
+          --card-bg: #2a2a36;
+          --dark-color: #f1f1f1;
+      }
+      
+      .dark-mode .day-card {
+          background: var(--card-bg);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      
+      .dark-mode .date {
+          color: #aaa;
+      }
+      
+      .dark-mode .time-label {
+          color: #aaa;
+      }
+      
+      .dark-mode .time-value {
+          color: #f1f1f1;
+      }
+      
+      .dark-mode .note {
+          background-color: rgba(42, 42, 54, 0.9);
+      }
+      
+      .dark-mode .note p {
+          color: #ccc;
+      }
+      
+      .dark-mode .note strong {
+          color: #f1f1f1;
+      }
+      
+      .dark-mode .milestone {
+          background: linear-gradient(135deg, #2a2a36, #222230);
+      }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <div class="mosque-silhouette"></div>
+  
+  <div class="container">
+      <div class="header">
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21.5287 15.9294C21.3687 15.6594 20.9187 15.2394 19.7987 15.4394C19.1787 15.5494 18.5487 15.5994 17.9187 15.5694C15.5887 15.4694 13.4787 14.3994 12.0087 12.7494C10.7087 11.2994 9.90873 9.40938 9.89873 7.36938C9.89873 6.22938 10.1187 5.12938 10.5687 4.08938C11.0087 3.07938 10.6987 2.54938 10.4787 2.32938C10.2487 2.09938 9.70873 1.77938 8.64873 2.21938C4.55873 3.93938 2.02873 8.03938 2.32873 12.4294C2.62873 16.5594 5.52873 20.0894 9.36873 21.4194C10.2787 21.7394 11.2587 21.9294 12.2587 21.9694C12.4187 21.9794 12.5787 21.9894 12.7387 21.9894C16.0887 21.9894 19.2287 20.4094 21.2087 17.7194C21.8787 16.7894 21.6987 16.1994 21.5287 15.9294Z" fill="white"/>
+          </svg>
+          <div class="decor decor-1"></div>
+          <div class="decor decor-2"></div>
+          <h1>Ramadan Calendar 2025</h1>
+          <p>Sahiwal, Pakistan</p>
+      </div>
+      
+      <div class="tabs-container">
+          <div class="tabs">
+              <div class="tab active" onclick="selectTab(this, 'first-ashra')">First Ashra</div>
+              <div class="tab" onclick="selectTab(this, 'second-ashra')">Second Ashra</div>
+              <div class="tab" onclick="selectTab(this, 'third-ashra')">Third Ashra</div>
+              <div class="tab" onclick="selectTab(this, 'all-days')">All Days</div>
+          </div>
+      </div>
+      
+      <div class="calendar-grid" id="calendar-grid">
+          <!-- Day cards will be generated by JavaScript -->
+      </div>
+      
+      <div class="note-container">
+          <div class="note">
+              <p><strong>Note:</strong> 1 minute preventative difference in Sehri (-1 min) & Iftar (+1 min)</p>
+          </div>
+      </div>
+  </div>
+  
+  <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="white"/>
+          <path d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z" fill="#4a154b"/>
+      </svg>
+  </button>
+  
+  <script>
+      // Ramadan calendar data
+      const ramadanData = [
+          { day: 1, sehri: "05:12 AM", iftar: "6:08 PM", date: "02 Mar 2025" },
+          { day: 2, sehri: "05:11 AM", iftar: "6:09 PM", date: "03 Mar 2025" },
+          { day: 3, sehri: "05:10 AM", iftar: "6:09 PM", date: "04 Mar 2025" },
+          { day: 4, sehri: "05:09 AM", iftar: "6:10 PM", date: "05 Mar 2025" },
+          { day: 5, sehri: "05:08 AM", iftar: "6:11 PM", date: "06 Mar 2025" },
+          { day: 6, sehri: "05:06 AM", iftar: "6:11 PM", date: "07 Mar 2025" },
+          { day: 7, sehri: "05:05 AM", iftar: "6:12 PM", date: "08 Mar 2025" },
+          { day: 8, sehri: "05:04 AM", iftar: "6:13 PM", date: "09 Mar 2025" },
+          { day: 9, sehri: "05:03 AM", iftar: "6:13 PM", date: "10 Mar 2025" },
+          { day: 10, sehri: "05:02 AM", iftar: "6:14 PM", date: "11 Mar 2025" },
+          { day: 11, sehri: "05:00 AM", iftar: "6:15 PM", date: "12 Mar 2025" },
+          { day: 12, sehri: "04:59 AM", iftar: "6:15 PM", date: "13 Mar 2025" },
+          { day: 13, sehri: "04:58 AM", iftar: "6:16 PM", date: "14 Mar 2025" },
+          { day: 14, sehri: "04:57 AM", iftar: "6:17 PM", date: "15 Mar 2025" },
+          { day: 15, sehri: "04:55 AM", iftar: "6:17 PM", date: "16 Mar 2025" },
+          { day: 16, sehri: "04:54 AM", iftar: "6:18 PM", date: "17 Mar 2025" },
+          { day: 17, sehri: "04:53 AM", iftar: "6:19 PM", date: "18 Mar 2025" },
+          { day: 18, sehri: "04:52 AM", iftar: "6:19 PM", date: "19 Mar 2025" },
+          { day: 19, sehri: "04:50 AM", iftar: "6:20 PM", date: "20 Mar 2025" },
+          { day: 20, sehri: "04:49 AM", iftar: "6:21 PM", date: "21 Mar 2025" },
+          { day: 21, sehri: "04:48 AM", iftar: "6:21 PM", date: "22 Mar 2025" },
+          { day: 22, sehri: "04:46 AM", iftar: "6:22 PM", date: "23 Mar 2025" },
+          { day: 23, sehri: "04:45 AM", iftar: "6:23 PM", date: "24 Mar 2025" },
+          { day: 24, sehri: "04:44 AM", iftar: "6:23 PM", date: "25 Mar 2025" },
+          { day: 25, sehri: "04:42 AM", iftar: "6:24 PM", date: "26 Mar 2025" },
+          { day: 26, sehri: "04:41 AM", iftar: "6:24 PM", date: "27 Mar 2025" },
+          { day: 27, sehri: "04:40 AM", iftar: "6:25 PM", date: "28 Mar 2025" },
+          { day: 28, sehri: "04:38 AM", iftar: "6:26 PM", date: "29 Mar 2025" },
+          { day: 29, sehri: "04:37 AM", iftar: "6:26 PM", date: "30 Mar 2025" },
+          { day: 30, sehri: "04:36 AM", iftar: "6:27 PM", date: "31 Mar 2025" }
+      ];
+      
+      // Function to generate day cards
+      function generateDayCards(data) {
+          const grid = document.getElementById('calendar-grid');
+          grid.innerHTML = '';
+          
+          data.forEach(item => {
+              const card = document.createElement('div');
+              card.className = 'day-card';
+              
+              // Add special classes for first day and milestone days
+              if (item.day === 1) {
+                  card.classList.add('first-day');
+              }
+              
+              if (item.day === 10 || item.day === 20 || item.day === 30) {
+                  card.classList.add('milestone');
+              }
+              
+              // Set animation delay based on index
+              card.style.animationDelay = ${0.05 * item.day}s;
+              
+              card.innerHTML = `
+                  <div class="day-number">${item.day}</div>
+                  <div class="date">${item.date}</div>
+                  <div class="times">
+                      <div class="time-item">
+                          <div class="time-icon sehri-icon">
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M12 6.5C12.83 6.5 13.5 5.83 13.5 5C13.5 4.17 12.83 3.5 12 3.5C11.17 3.5 10.5 4.17 10.5 5C10.5 5.83 11.17 6.5 12 6.5Z" fill="currentColor"/>
+                                  <path d="M12 2C11.72 2 11.5 1.78 11.5 1.5V1C11.5 0.72 11.72 0.5 12 0.5C12.28 0.5 12.5 0.72 12.5 1V1.5C12.5 1.78 12.28 2 12 2Z" fill="currentColor"/>
+                                  <path d="M12 22C11.72 22 11.5 21.78 11.5 21.5V21C11.5 20.72 11.72 20.5 12 20.5C12.28 20.5 12.5 20.72 12.5 21V21.5C12.5 21.78 12.28 22 12 22Z" fill="currentColor"/>
+                                  <path d="M21.5 12C21.5 11.72 21.72 11.5 22 11.5H22.5C22.78 11.5 23 11.72 23 12C23 12.28 22.78 12.5 22.5 12.5H22C21.72 12.5 21.5 12.28 21.5 12Z" fill="currentColor"/>
+                                  <path d="M2 12C2 11.72 2.22 11.5 2.5 11.5H3C3.28 11.5 3.5 11.72 3.5 12C3.5 12.28 3.28 12.5 3 12.5H2.5C2.22 12.5 2 12.28 2 12Z" fill="currentColor"/>
+                                  <path d="M19.07 5.93C18.94 5.8 18.88 5.62 18.92 5.44C18.97 5.26 19.11 5.11 19.3 5.07C19.67 4.97 20.03 5.26 20.03 5.62C20.03 5.8 19.95 5.95 19.83 6.07C19.7 6.2 19.52 6.26 19.34 6.22C19.22 6.2 19.14 6.15 19.07 6.08C19.05 6.01 19.05 5.97 19.07 5.93Z" fill="currentColor"/>
+                              </svg>
+                          </div>
+                          <div>
+                              <div class="time-label">Sehri</div>
+                              <div class="time-value">${item.sehri}</div>
+                          </div>
+                      </div>
+                      <div class="time-item">
+                          <div class="time-icon iftar-icon">
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M12 17.5C11.17 17.5 10.5 18.17 10.5 19C10.5 19.83 11.17 20.5 12 20.5C12.83 20.5 13.5 19.83 13.5 19C13.5 18.17 12.83 17.5 12 17.5Z" fill="currentColor"/>
+                                  <path d="M12 22C11.72 22 11.5 22.22 11.5 22.5V23C11.5 23.28 11.72 23.5 12 23.5C12.28 23.5 12.5 23.28 12.5 23V22.5C12.5 22.22 12.28 22 12 22Z" fill="currentColor"/>
+                                  <path d="M12 2C11.72 2 11.5 2.22 11.5 2.5V3C11.5 3.28 11.72 3.5 12 3.5C12.28 3.5 12.5 3.28 12.5 3V2.5C12.5 2.22 12.28 2 12 2Z" fill="currentColor"/>
+                                  <path d="M2.5 12C2.5 12.28 2.28 12.5 2 12.5H1.5C1.22 12.5 1 12.28 1 12C1 11.72 1.22 11.5 1.5 11.5H2C2.28 11.5 2.5 11.72 2.5 12Z" fill="currentColor"/>
+                                  <path d="M22 12C22 12.28 21.78 12.5 21.5 12.5H21C20.72 12.5 20.5 12.28 20.5 12C20.5 11.72 20.72 11.5 21 11.5H21.5C21.78 11.5 22 11.72 22 12Z" fill="currentColor"/>
+                                  <path d="M4.93 18.07C5.06 18.2 5.12 18.38 5.08 18.56C5.03 18.74 4.89 18.89 4.7 18.93C4.33 19.03 3.97 18.74 3.97 18.38C3.97 18.2 4.05 18.05 4.17 17.93C4.3 17.8 4.48 17.74 4.66 17.78C4.78 17.8 4.86 17.85 4.93 17.92C4.95 17.99 4.95 18.03 4.93 18.07Z" fill="currentColor"/>
+                                  <path d="M19.07 4.93C19.2 5.06 19.26 5.24 19.22 5.42C19.17 5.6 19.03 5.75 18.84 5.79C18.47 5.89 18.11 5.6 18.11 5.24C18.11 5.06 18.19 4.91 18.31 4.79C18.44 4.66 18.62 4.6 18.8 4.64C18.92 4.66 19 4.71 19.07 4.78C19.09 4.85 19.09 4.89 19.07 4.93Z" fill="currentColor"/>
+                                  <path d="M5.24 4.93C5.11 5.06 5.05 5.24 5.09 5.42C5.14 5.6 5.28 5.75 5.47 5.79C5.84 5.89 6.2 5.6 6.2 5.24C6.2 5.06 6.12 4.91 6 4.79C5.87 4.66 5.69 4.6 5.51 4.64C5.39 4.66 5.31 4.71 5.24 4.78C5.22 4.85 5.22 4.89 5.24 4.93Z" fill="currentColor"/>
+                                  <path d="M19.07 19.07C18.94 19.2 18.88 19.38 18.92 19.56C18.97 19.74 19.11 19.89 19.3 19.93C19.67 20.03 20.03 19.74 20.03 19.38C20.03 19.2 19.95 19.05 19.83 18.93C19.7 18.8 19.52 18.74 19.34 18.78C19.22 18.8 19.14 18.85 19.07 18.92C19.05 18.99 19.05 19.03 19.07 19.07Z" fill="currentColor"/>
+                              </svg>
+                          </div>
+                          <div>
+                              <div class="time-label">Iftar</div>
+                              <div class="time-value">${item.iftar}</div>
+                          </div>
+                      </div>
+                  </div>
+              `;
+              
+              grid.appendChild(card);
+          });
+      }
+      
+      // Function to filter days based on selected tab
+      function filterByAshra(data, ashraType) {
+          if (ashraType === 'first-ashra') {
+              return data.filter(item => item.day >= 1 && item.day <= 10);
+          } else if (ashraType === 'second-ashra') {
+              return data.filter(item => item.day >= 11 && item.day <= 20);
+          } else if (ashraType === 'third-ashra') {
+              return data.filter(item => item.day >= 21 && item.day <= 30);
+          } else {
+              return data;
+          }
+      }
+      
+      // Function to handle tab selection
+      function selectTab(tab, ashraType) {
+          // Remove active class from all tabs
+          document.querySelectorAll('.tab').forEach(t => {
+              t.classList.remove('active');
+          });
+          
+          // Add active class to selected tab
+          tab.classList.add('active');
+          
+          // Filter and regenerate day cards
+          const filteredData = filterByAshra(ramadanData, ashraType);
+          generateDayCards(filteredData);
+      }
+      
+      // Function to toggle dark/light theme
+      function toggleTheme() {
+          document.body.classList.toggle('dark-mode');
+          
+          // Update theme toggle icon if needed
+          const themeToggle = document.getElementById('theme-toggle');
+          if (document.body.classList.contains('dark-mode')) {
+              themeToggle.innerHTML = `
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#ffdd00"/>
+                      <path d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z" fill="#ff9d00"/>
+                  </svg>
+              `;
+          } else {
+              themeToggle.innerHTML = `
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="white"/>
+                      <path d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z" fill="#4a154b"/>
+                  </svg>
+              `;
+          }
+      }
+      
+      // Function to generate stars in the background
+      function createStars() {
+          const starsContainer = document.getElementById('stars');
+          const numberOfStars = 100;
+          
+          for (let i = 0; i < numberOfStars; i++) {
+              const star = document.createElement('div');
+              star.className = 'star';
+              
+              // Random positioning
+              const x = Math.floor(Math.random() * 100);
+              const y = Math.floor(Math.random() * 100);
+              
+              // Random size
+              const size = Math.random() * 3;
+              
+              // Random opacity and animation duration
+              const opacity = Math.random() * 0.7 + 0.3;
+              const duration = (Math.random() * 3 + 2) + 's';
+              
+              star.style.left = x + '%';
+              star.style.top = y + '%';
+              star.style.width = size + 'px';
+              star.style.height = size + 'px';
+              star.style.setProperty('--opacity', opacity);
+              star.style.setProperty('--duration', duration);
+              
+              starsContainer.appendChild(star);
+          }
+      }
+      
+      // Initialize the calendar when the page loads
+      document.addEventListener('DOMContentLoaded', function() {
+          // Generate stars in the background
+          createStars();
+          
+          // Initial load with first ashra
+          const filteredData = filterByAshra(ramadanData, 'first-ashra');
+          generateDayCards(filteredData);
+      });
+  </script>
+</body>
+</html>
